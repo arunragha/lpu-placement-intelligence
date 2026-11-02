@@ -1,0 +1,20 @@
+# Python environment and bytecode
+.venv/
+env/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary and local data artifacts
+*.log
+data/assessment_history.db-journal
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

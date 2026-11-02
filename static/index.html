@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LPU Placement Intelligence & Student Readiness Prediction Platform</title>
+  <meta name="description" content="Supervised machine learning platform estimating campus placement readiness, tree path explainability, skill gap diagnosis, and prescriptive preparation roadmaps for engineering students.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+
+    <!-- ====================================================================
+         COMPACT DESKTOP SIDEBAR + ACCESSIBLE MOBILE DRAWER
+         ==================================================================== -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">LPU</div>
+        <div>
+          <div class="brand-title">Placement Intel</div>
+          <div class="brand-subtitle">Readiness & Skill Diagnostics</div>
+        </div>
+      </div>
+
+      <!-- Short Clean Navigation Menu -->
+      <nav class="sidebar-nav">
+        <button type="button" class="nav-item-btn active" data-tab="overview" id="navTabOverview">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Overview</span>
+        </button>
+        <button type="button" class="nav-item-btn" data-tab="assessment" id="navTabAssessment">
+          <span class="nav-icon">📝</span>
+          <span class="nav-text">Assessment</span>
+        </button>
+        <button type="button" class="nav-item-btn" data-tab="plan" id="navTabPlan">
+          <span class="nav-icon">🎯</span>
+          <span class="nav-text">Improvement Plan</span>
+        </button>
+        <button type="button" class="nav-item-btn" data-tab="history" id="navTabHistory">
+          <span class="nav-icon">📈</span>
+          <span class="nav-text">History</span>
+        </button>
+        <button type="button" class="nav-item-btn" data-tab="mentor" id="navTabMentor">
+          <span class="nav-icon">👨‍🏫</span>
+          <span class="nav-text">Mentor</span>
+        </button>
+        <button type="button" class="nav-item-btn" data-tab="cohorts" id="navTabCohorts">
+          <span class="nav-icon">👥</span>
+          <span class="nav-text">Cohorts</span>
+        </button>
+        <button type="button" class="nav-item-btn" data-tab="methodology" id="navTabMethodology">
+          <span class="nav-icon">🔬</span>
+          <span class="nav-text">Methodology</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="badge-live">
+          <span class="pulse-dot"></span>
+          <span>Placement 2026</span>
+        </div>
+        <div class="sidebar-version">Demo Prototype v2.2</div>
+      </div>
+    </aside>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ====================================================================
+         MAIN APPLICATION AREA
+         ==================================================================== -->
+    <div class="app-main">
+      
+      <!-- Clean Top Bar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+            ☰
+          </button>
+          <div class="topbar-title-group">
+            <span class="topbar-current-view" id="topbarCurrentView">Overview</span>
+            <span class="topbar-badge">Academic Prototype</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="user-session-chip" id="userSessionChip">
+            <span id="userSessionLabel">Guest (Demo)</span>
+            <button type="button" class="btn-auth-sm" id="btnOpenAuthModal">Sign In</button>
+          </div>
+          <button type="button" class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+            ☀️
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Views Container -->
+      <main class="app-content-container">
+
+        <!-- DEMO SYNTHETIC DATA BANNER (MANDATORY TRANSPARENCY NOTICE) -->
+        <div class="synthetic-data-banner">
+          <span style="font-size: 1.4rem;">⚠️</span>
+          <div>
+            <strong>DEMO — SYNTHETIC DATA ENVIRONMENT:</strong>
+            This platform is evaluated on algorithmically synthesized student profiles for demonstrating supervised machine learning pipelines, model comparisons, explainability, and mentor analytics.
+            Evaluation scores measure agreement with the synthetic rubric, <strong>not real LPU students or actual placement outcomes</strong>.
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             VIEW 1: OVERVIEW & ARCHETYPE LAUNCHER
+             ==================================================================== -->
+        <section class="view-section active" id="view-overview">
+          
+          <!-- Landing Hero Header -->
+          <div class="landing-hero" id="landingHero">
+            <div class="hero-tag"><span>🎓</span> Academic Machine Learning Prototype v2.2</div>
+            <h1 class="hero-title">LPU Placement Intelligence Platform</h1>
+            <p class="hero-subtitle">
+              Supervised machine learning placement outcome estimation, transparent 5-pillar skill readiness scoring, Decision Tree Path explainability, and prescriptive 90-day action roadmaps.
+            </p>
+            <div class="hero-cta-group">
+              <button type="button" class="btn-primary" id="btnHeroStart"><span>⚡ Start Student Assessment</span></button>
+              <button type="button" class="btn-secondary" id="btnHeroDemo"><span>📥 Explore Demo Profiles</span></button>
+              <button type="button" class="btn-secondary" id="btnHeroGovernance"><span>🔬 View ML Benchmarks</span></button>
+            </div>
+          </div>
+
+          <!-- Conceptual Distinction Explainer Card -->
+          <div class="glass-card" style="margin-top: 1.5rem; margin-bottom: 1.75rem;">
+            <div class="card-title">
+              <span>🧭</span> Three Distinct Pillars of Placement Intelligence
+            </div>
+            <div class="card-subtitle">
+              To ensure algorithmic honesty and clarity, this platform rigorously separates statistical estimates, transparent readiness scores, and preparation guidance:
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1rem;">
+              <div style="background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.25rem; border-left: 4px solid #10b981;">
+                <div style="font-weight: 700; color: #10b981; font-size: 1rem; margin-bottom: 0.35rem;">
+                  1. Demo Model Estimate
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                  A supervised machine learning classification estimate trained on synthetic historical placement profiles. Expressed as a whole percentage; not validated for actual LPU students.
+                </div>
+              </div>
+
+              <div style="background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.25rem; border-left: 4px solid #6366f1;">
+                <div style="font-weight: 700; color: #6366f1; font-size: 1rem; margin-bottom: 0.35rem;">
+                  2. Student Readiness Score
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                  A deterministic 0-100 score calculated via transparent university weights across 5 pillars (Technical, Aptitude, Communication, Projects, Internships) mapped to 3 canonical tiers.
+                </div>
+              </div>
+
+              <div style="background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.25rem; border-left: 4px solid var(--lpu-orange);">
+                <div style="font-weight: 700; color: var(--lpu-orange); font-size: 1rem; margin-bottom: 0.35rem;">
+                  3. Actionable Preparation Plan
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                  Prescriptive 30-, 60-, and 90-day sprint milestones addressing specific competency deficits. Guidance based on gap analysis, not guaranteed placement.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Archetype Presets Showcase -->
+          <div class="glass-card" style="margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <div class="card-title">
+                  <span>⚡</span> Synthetic Student Archetypes (1-Click Evaluation)
+                </div>
+                <div class="card-subtitle">
+                  Select a representative synthetic student profile to instantly preview supervised predictions, radar benchmarks, and roadmaps.
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.75rem; align-items: center;">
+                <select id="overviewPresetDropdown" style="padding: 0.5rem 0.85rem; border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass);">
+                  <!-- Populated dynamically by JS -->
+                </select>
+                <button type="button" class="btn-primary" id="btnOverviewLoadPreset" style="white-space: nowrap;">
+                  <span>📥 Load &amp; Evaluate</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Archetypes Cards Grid -->
+            <div class="archetypes-grid">
+              <!-- Card 1 -->
+              <div class="archetype-card" onclick="applyPresetAndEvaluate('LPU_DEMO_ADV01')">
+                <div class="archetype-header">
+                  <div>
+                    <div class="archetype-name">Aarav Sharma</div>
+                    <div class="archetype-role">Software Development Engineer (SDE)</div>
+                  </div>
+                  <span class="tier-badge tier-advanced" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">Strong prep</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                  Top-tier candidate with competitive programming rating (1820), 380 DSA problems solved, and clean academic record.
+                </p>
+                <div class="archetype-specs">
+                  <span class="spec-pill">CGPA: 8.95</span>
+                  <span class="spec-pill">Backlogs: 0</span>
+                  <span class="spec-pill">DSA: 380 solved</span>
+                  <span class="spec-pill">Internships: 2</span>
+                </div>
+                <button type="button" class="btn-secondary" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; width: 100%; justify-content: center; margin-top: 0.5rem;">
+                  Evaluate Aarav's Profile →
+                </button>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="archetype-card" onclick="applyPresetAndEvaluate('LPU_DEMO_DEV01')">
+                <div class="archetype-header">
+                  <div>
+                    <div class="archetype-name">Priya Patel</div>
+                    <div class="archetype-role">Full Stack Developer</div>
+                  </div>
+                  <span class="tier-badge tier-developing" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">Developing</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                  Solid aptitude and web development skills, but needs deeper DSA practice and mock technical interview drills.
+                </p>
+                <div class="archetype-specs">
+                  <span class="spec-pill">CGPA: 7.80</span>
+                  <span class="spec-pill">Backlogs: 0</span>
+                  <span class="spec-pill">DSA: 135 solved</span>
+                  <span class="spec-pill">Internships: 1</span>
+                </div>
+                <button type="button" class="btn-secondary" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; width: 100%; justify-content: center; margin-top: 0.5rem;">
+                  Evaluate Priya's Profile →
+                </button>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="archetype-card" onclick="applyPresetAndEvaluate('LPU_DEMO_RISK01')">
+                <div class="archetype-header">
+                  <div>
+                    <div class="archetype-name">Rohit Verma</div>
+                    <div class="archetype-role">Associate Tech Consultant</div>
+                  </div>
+                  <span class="tier-badge tier-foundation" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">Needs attention</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                  At-risk candidate carrying 2 active backlogs, low coding scores, and requiring immediate foundational coursework recovery.
+                </p>
+                <div class="archetype-specs">
+                  <span class="spec-pill">CGPA: 6.20</span>
+                  <span class="spec-pill" style="color: #ef4444;">Backlogs: 2 Active</span>
+                  <span class="spec-pill">DSA: 35 solved</span>
+                  <span class="spec-pill">Internships: 0</span>
+                </div>
+                <button type="button" class="btn-secondary" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; width: 100%; justify-content: center; margin-top: 0.5rem;">
+                  Evaluate Rohit's Profile →
+                </button>
+              </div>
+
+              <!-- Card 4 -->
+              <div class="archetype-card" onclick="applyPresetAndEvaluate('LPU_DEMO_DS01')">
+                <div class="archetype-header">
+                  <div>
+                    <div class="archetype-name">Sneha Rao</div>
+                    <div class="archetype-role">AI / ML &amp; Data Science</div>
+                  </div>
+                  <span class="tier-badge tier-advanced" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">Strong prep</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                  High quantitative reasoning, machine learning project portfolio, and proven hackathon achievements.
+                </p>
+                <div class="archetype-specs">
+                  <span class="spec-pill">CGPA: 8.55</span>
+                  <span class="spec-pill">Backlogs: 0</span>
+                  <span class="spec-pill">DSA: 220 solved</span>
+                  <span class="spec-pill">Hackathons: 3</span>
+                </div>
+                <button type="button" class="btn-secondary" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; width: 100%; justify-content: center; margin-top: 0.5rem;">
+                  Evaluate Sneha's Profile →
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 2: STUDENT ASSESSMENT FORM
+             ==================================================================== -->
+        <section class="view-section" id="view-assessment">
+          
+          <!-- Explicit Demo Profile Loader Action -->
+          <div class="glass-card" style="margin-top: 0.5rem; margin-bottom: 1.5rem; padding: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">
+                  ⚡ Pre-fill with Synthetic Preset Archetypes
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                  Load a pre-configured profile into the form to experiment with individual adjustments.
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.75rem; align-items: center;">
+                <select id="presetDropdown" style="padding: 0.5rem 0.85rem; border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass);">
+                  <!-- Populated by JS -->
+                </select>
+                <button type="button" class="btn-secondary" id="btnLoadPreset" style="white-space: nowrap;">
+                  <span>📥 Load Demo Profile</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Server-Side Validation Alert Box -->
+          <div class="validation-alert" id="assessmentValidationAlert"></div>
+
+          <!-- Step-by-Step Assessment Input Form -->
+          <div class="glass-card" style="margin-bottom: 2rem;">
+            <div class="card-title">
+              <span>📝</span> Comprehensive Student Assessment Form
+            </div>
+            <div class="card-subtitle">
+              Supported Scope: B.Tech / MCA in Computer Science, Information Technology, AI &amp; Data, Electronics &amp; Communication, and related disciplines.
+            </div>
+
+            <form id="studentAssessmentForm">
+              <!-- Wizard Category Navigation Tabs -->
+              <div class="form-section-tabs">
+                <button type="button" class="form-tab-btn active" data-cat="acad">📚 1. Academic &amp; Identity</button>
+                <button type="button" class="form-tab-btn" data-cat="goal">🎯 2. Career Goal &amp; Time</button>
+                <button type="button" class="form-tab-btn" data-cat="tech">💻 3. Technical Preparation</button>
+                <button type="button" class="form-tab-btn" data-cat="soft">🗣️ 4. Aptitude &amp; Soft Skills</button>
+                <button type="button" class="form-tab-btn" data-cat="exp">🚀 5. Projects &amp; Experience</button>
+              </div>
+
+              <!-- STEP 1: Academics & Profile Identifiers -->
+              <div class="form-group-grid form-cat-group" data-cat="acad">
+                <div class="form-field">
+                  <label class="field-label" for="field_student_id">
+                    Student Reference ID (Optional)
+                  </label>
+                  <input type="text" id="field_student_id" placeholder="e.g. LPU2026_1042">
+                  <span class="field-help" style="font-size: 0.75rem; color: var(--text-muted);">Used to track progress across repeated assessments in local history.</span>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_program">Degree Program</label>
+                  <select id="field_program">
+                    <option value="B.Tech">B.Tech (Bachelor of Technology)</option>
+                    <option value="M.Tech">M.Tech (Master of Technology)</option>
+                    <option value="MCA">MCA (Master of Computer Applications)</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_branch">Engineering Discipline / Branch</label>
+                  <select id="field_branch">
+                    <option value="Computer Science &amp; Engineering">Computer Science &amp; Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="AI &amp; Data Engineering">AI &amp; Data Engineering</option>
+                    <option value="Electronics &amp; Communication">Electronics &amp; Communication</option>
+                    <option value="Mechanical &amp; Mechatronics">Mechanical &amp; Mechatronics</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_semester">Current Semester &amp; Batch</label>
+                  <select id="field_semester">
+                    <option value="6">Semester 6 (Pre-Placement Pre-final Year)</option>
+                    <option value="7">Semester 7 (Active Placement Season)</option>
+                    <option value="8">Semester 8 (Final Semester)</option>
+                    <option value="5">Semester 5 (Early Preparation)</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_cgpa">
+                    <span>Current CGPA (Scale 0.0 - 10.0)</span>
+                    <span class="field-val-badge" id="badge_cgpa">8.25</span>
+                  </label>
+                  <input type="range" id="field_cgpa" min="5.0" max="10.0" step="0.05" value="8.25">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_active_backlogs">Active Standing Backlogs Count</label>
+                  <select id="field_active_backlogs">
+                    <option value="0">0 (Clean Record - Fully Eligible)</option>
+                    <option value="1">1 Active Backlog</option>
+                    <option value="2">2 Active Backlogs</option>
+                    <option value="3">3+ Active Backlogs</option>
+                  </select>
+                </div>
+
+                <!-- Optional Institutional Eligibility Fields -->
+                <div class="form-field" style="grid-column: 1 / -1; margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px dashed var(--border-glass);">
+                  <div style="font-size: 0.85rem; font-weight: 700; color: var(--lpu-orange); margin-bottom: 0.5rem;">
+                    📋 Optional Institutional Eligibility Criteria (Separate from ML Skill Readiness)
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_attendance_percentage">
+                    <span>Attendance Percentage (%)</span>
+                    <span class="field-val-badge" id="badge_attendance_percentage">85%</span>
+                  </label>
+                  <input type="range" id="field_attendance_percentage" min="50" max="100" step="1" value="85">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_tenth_percentage">
+                    <span>10th Grade Percentage (%)</span>
+                    <span class="field-val-badge" id="badge_tenth_percentage">82%</span>
+                  </label>
+                  <input type="range" id="field_tenth_percentage" min="50" max="100" step="0.5" value="82">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_twelfth_percentage">
+                    <span>12th Grade Percentage (%)</span>
+                    <span class="field-val-badge" id="badge_twelfth_percentage">80%</span>
+                  </label>
+                  <input type="range" id="field_twelfth_percentage" min="50" max="100" step="0.5" value="80">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_history_backlogs">Historical Cleared Backlogs</label>
+                  <select id="field_history_backlogs">
+                    <option value="0">0 (Never had backlogs)</option>
+                    <option value="1">1 Cleared Backlog</option>
+                    <option value="2">2 Cleared Backlogs</option>
+                    <option value="3">3+ Cleared Backlogs</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- STEP 2: Career Goal & Time Commitment -->
+              <div class="form-group-grid form-cat-group" data-cat="goal" style="display: none;">
+                <div class="form-field" style="grid-column: 1 / -1;">
+                  <label class="field-label" for="field_target_role">Primary Target Placement Role</label>
+                  <select id="field_target_role" style="font-size: 1rem; padding: 0.65rem;">
+                    <option value="Software Development Engineer (SDE)">Software Development Engineer (SDE) - Algorithms, System Design, Core CS</option>
+                    <option value="Full Stack Developer">Full Stack Developer - Frameworks, Databases, API Architecture</option>
+                    <option value="AI / ML &amp; Data Science Engineer">AI / ML &amp; Data Science Engineer - Python, Machine Learning, Analytics</option>
+                    <option value="Cloud &amp; DevOps Engineer">Cloud &amp; DevOps Engineer - Microservices, CI/CD, Containerization</option>
+                    <option value="Data &amp; Business Analyst">Data &amp; Business Analyst - SQL, Business Intelligence, Quantitative Reasoning</option>
+                    <option value="QA &amp; Automation Engineer">QA &amp; Automation Engineer - Test Frameworks, Performance, CI Testing</option>
+                    <option value="Associate Technology Consultant">Associate Technology Consultant - Enterprise Systems, Client Advisory</option>
+                  </select>
+                  <span class="field-help" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    The student's chosen career target tailors radar benchmarks and the 90-day action roadmap.
+                  </span>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_weekly_prep_hours">Weekly Preparation Time Available</label>
+                  <select id="field_weekly_prep_hours">
+                    <option value="10-15 hrs/week">10 - 15 hours / week (Balanced Schedule)</option>
+                    <option value="5-10 hrs/week">5 - 10 hours / week (Limited / Coursework Heavy)</option>
+                    <option value="15-20 hrs/week">15 - 20 hours / week (Intensive Placement Preparation)</option>
+                    <option value="20+ hrs/week">20+ hours / week (Dedicated Placement Sprint)</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_score_source">Assessment Score Source</label>
+                  <select id="field_score_source">
+                    <option value="mentor_reviewed">Mentor-Reviewed / Departmental Assessment</option>
+                    <option value="recorded_assessment">Recorded Assessment (Proctored Test Center)</option>
+                    <option value="self_reported">Self-Reported Baseline</option>
+                    <option value="demo_example">Demo Archetype Example</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- STEP 3: Technical Preparation -->
+              <div class="form-group-grid form-cat-group" data-cat="tech" style="display: none;">
+                <div class="form-field">
+                  <label class="field-label" for="field_dsa_problems_solved">
+                    <span>Verified DSA Coding Problems Solved</span>
+                    <span class="field-val-badge" id="badge_dsa_problems_solved">220</span>
+                  </label>
+                  <input type="range" id="field_dsa_problems_solved" min="0" max="650" step="5" value="220">
+                  <span class="field-help" style="font-size: 0.75rem; color: var(--text-muted);">Across LeetCode, CodeChef, HackerRank, GeeksforGeeks.</span>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_dsa_score">
+                    <span>Proctored DSA Assessment Score (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_dsa_score">70</span>
+                  </label>
+                  <input type="range" id="field_dsa_score" min="0" max="100" step="1" value="70">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_coding_rating">
+                    <span>Peak Competitive Contest Rating</span>
+                    <span class="field-val-badge" id="badge_coding_rating">1450</span>
+                  </label>
+                  <input type="range" id="field_coding_rating" min="800" max="2300" step="25" value="1450">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_web_cloud_score">
+                    <span>Web &amp; Cloud Frameworks Proficiency (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_web_cloud_score">65</span>
+                  </label>
+                  <input type="range" id="field_web_cloud_score" min="0" max="100" step="1" value="65">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_system_design_score">
+                    <span>System Architecture &amp; Design Score (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_system_design_score">60</span>
+                  </label>
+                  <input type="range" id="field_system_design_score" min="0" max="100" step="1" value="60">
+                </div>
+              </div>
+
+              <!-- STEP 4: Aptitude & Soft Skills -->
+              <div class="form-group-grid form-cat-group" data-cat="soft" style="display: none;">
+                <div class="form-field">
+                  <label class="field-label" for="field_quantitative_aptitude">
+                    <span>Quantitative Aptitude Score (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_quantitative_aptitude">72</span>
+                  </label>
+                  <input type="range" id="field_quantitative_aptitude" min="0" max="100" step="1" value="72">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_logical_reasoning">
+                    <span>Logical Reasoning Score (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_logical_reasoning">75</span>
+                  </label>
+                  <input type="range" id="field_logical_reasoning" min="0" max="100" step="1" value="75">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_verbal_ability">
+                    <span>Verbal &amp; Grammar Ability (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_verbal_ability">70</span>
+                  </label>
+                  <input type="range" id="field_verbal_ability" min="0" max="100" step="1" value="70">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_mock_interview_score">
+                    <span>Mock Technical &amp; HR Interview Score (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_mock_interview_score">68</span>
+                  </label>
+                  <input type="range" id="field_mock_interview_score" min="0" max="100" step="1" value="68">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_gd_score">
+                    <span>Group Discussion (GD) Score (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_gd_score">65</span>
+                  </label>
+                  <input type="range" id="field_gd_score" min="0" max="100" step="1" value="65">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_communication_rating">
+                    <span>Spoken Communication Rubric Rating (1.0 - 5.0)</span>
+                    <span class="field-val-badge" id="badge_communication_rating">3.5</span>
+                  </label>
+                  <input type="range" id="field_communication_rating" min="1.0" max="5.0" step="0.1" value="3.5">
+                  <span class="field-help" style="font-size: 0.75rem; color: var(--text-muted);">
+                    Rubric: 1=Elementary, 2=Basic, 3=Competent, 4=Proficient (STAR method), 5=Fluent &amp; Articulate.
+                  </span>
+                </div>
+              </div>
+
+              <!-- STEP 5: Projects & Practical Experience -->
+              <div class="form-group-grid form-cat-group" data-cat="exp" style="display: none;">
+                <div class="form-field">
+                  <label class="field-label" for="field_projects_count">
+                    <span>Major Capstone Projects Count</span>
+                    <span class="field-val-badge" id="badge_projects_count">2</span>
+                  </label>
+                  <input type="range" id="field_projects_count" min="0" max="8" step="1" value="2">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_github_quality">
+                    <span>Project Quality Rubric Score (0 - 100)</span>
+                    <span class="field-val-badge" id="badge_github_quality">70</span>
+                  </label>
+                  <input type="range" id="field_github_quality" min="0" max="100" step="1" value="70">
+                  <span class="field-help" style="font-size: 0.75rem; color: var(--text-muted);">
+                    Assessed across: functionality, technical depth, individual contribution, documentation &amp; testing.
+                  </span>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_internships_count">
+                    <span>Completed Internships Count</span>
+                    <span class="field-val-badge" id="badge_internships_count">1</span>
+                  </label>
+                  <input type="range" id="field_internships_count" min="0" max="4" step="1" value="1">
+                  <span class="field-help" style="font-size: 0.75rem; color: var(--text-muted);">Select 0 if "Not participated".</span>
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_internship_duration_months">
+                    <span>Total Internship Duration (Months)</span>
+                    <span class="field-val-badge" id="badge_internship_duration_months">2</span>
+                  </label>
+                  <input type="range" id="field_internship_duration_months" min="0" max="12" step="1" value="2">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_certifications_count">
+                    <span>Verified Tech Certifications</span>
+                    <span class="field-val-badge" id="badge_certifications_count">1</span>
+                  </label>
+                  <input type="range" id="field_certifications_count" min="0" max="6" step="1" value="1">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_hackathons_participated">
+                    <span>Hackathons Participated</span>
+                    <span class="field-val-badge" id="badge_hackathons_participated">1</span>
+                  </label>
+                  <input type="range" id="field_hackathons_participated" min="0" max="6" step="1" value="1">
+                </div>
+
+                <div class="form-field">
+                  <label class="field-label" for="field_hackathons_won">
+                    <span>Hackathons Won / Top 3 Finishes</span>
+                    <span class="field-val-badge" id="badge_hackathons_won">0</span>
+                  </label>
+                  <input type="range" id="field_hackathons_won" min="0" max="3" step="1" value="0">
+                  <span class="field-help" style="font-size: 0.75rem; color: var(--text-muted);">Must not exceed hackathons participated.</span>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary" id="btnSubmitAssessment">
+                  <span>⚡ Run Supervised ML Readiness Evaluation</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 3: IMPROVEMENT PLAN & DIAGNOSTIC DASHBOARD
+             ==================================================================== -->
+        <section class="view-section" id="view-plan">
+          
+          <!-- Empty State Container when no assessment has run yet -->
+          <div class="empty-state-card" id="planEmptyState">
+            <div class="empty-state-icon">🎯</div>
+            <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">No Assessment Evaluated Yet</h2>
+            <p style="color: var(--text-secondary); max-width: 540px; margin: 0 auto 1.5rem auto;">
+              Complete the student assessment or select a synthetic archetype from the Overview tab to view your personalized readiness diagnostics, radar gap analysis, and 90-day improvement plan.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 1rem;">
+              <button type="button" class="btn-primary" id="btnEmptyGoAssessment">
+                <span>📝 Go to Assessment Form</span>
+              </button>
+              <button type="button" class="btn-secondary" id="btnEmptyLoadArchetype">
+                <span>⚡ Load Demo Archetype</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Diagnostic Results Section (Visible after evaluation) -->
+          <div id="assessmentResultsSection" style="display: none;">
+            
+            <!-- Student Header Profile Bar -->
+            <div class="glass-card" style="margin-bottom: 1.5rem; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="brand-logo" style="width: 40px; height: 40px; font-size: 1.1rem;">🎓</div>
+                <div>
+                  <div style="font-size: 1.1rem; font-weight: 700;" id="planHeaderStudentId">Student: LPU2026_CANDIDATE</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary);" id="planHeaderMeta">Computer Science &amp; Engineering • Semester 6</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.75rem; align-items: center;">
+                <button type="button" class="btn-secondary" onclick="window.print()">
+                  <span>🖨️</span> Print / Export Report
+                </button>
+                <button type="button" class="btn-secondary" id="btnPlanReassess">
+                  <span>✏️</span> Edit Inputs
+                </button>
+              </div>
+            </div>
+
+            <!-- Primary KPI Summary Grid -->
+            <div class="results-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+              
+              <!-- KPI 1: Demo Model Estimate -->
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Demo Model Estimate</div>
+                <div id="kpiPlacementOutcomeBadge" class="tier-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; margin: 0.4rem 0;">
+                  <span>🎯</span> <span id="kpiPlacementOutcomeText">Likely Placed</span>
+                </div>
+                <div class="kpi-value" id="kpiSupervisedPlacementProb" style="color: #10b981; font-size: 1.7rem;">--%</div>
+                <div class="kpi-subtext" id="kpiPlacementModelStatus" style="font-size: 0.74rem; line-height: 1.35; margin-top: 0.35rem;">
+                  Generated by a model trained on synthetic profiles. Not validated for real student placement outcomes.
+                </div>
+              </div>
+
+              <!-- KPI 2: Student Readiness Assessment (Canonical 3-Tier) -->
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Student Readiness Assessment</div>
+                <div class="kpi-value" id="kpiReadinessScoreValue" style="color: #6366f1; font-size: 1.7rem; margin-top: 0.2rem;">-- / 100</div>
+                <div id="kpiReadinessBandBadge" class="tier-badge tier-placement-ready" style="margin: 0.35rem 0;">
+                  <span>📈</span> <span id="kpiReadinessBandText">Developing</span>
+                </div>
+                <div class="kpi-subtext">Deterministic 5-Pillar University Rubric (0-100)</div>
+              </div>
+
+              <!-- KPI 3: Input Completeness -->
+              <div class="glass-card kpi-card">
+                <div class="kpi-label" title="Percentage of required assessment fields supplied. This is not model confidence or placement likelihood.">
+                  Input Completeness ℹ️
+                </div>
+                <div class="kpi-value" id="kpiCompleteness" style="color: #3b82f6; font-size: 1.7rem; margin-top: 0.2rem;">100%</div>
+                <div class="kpi-subtext" id="kpiCompletenessSubtext" style="font-size: 0.74rem; line-height: 1.35; margin-top: 0.35rem;">
+                  Percentage of required assessment fields supplied. This is not model confidence or placement likelihood.
+                </div>
+              </div>
+
+              <!-- KPI 4: Institutional Eligibility Check -->
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Institutional Eligibility Check</div>
+                <div class="kpi-value" id="kpiEligibility" style="font-size: 1.35rem; color: #10b981; margin-top: 0.25rem;">Fully Eligible</div>
+                <div class="kpi-subtext" id="kpiEligibilitySubtext">Standard Campus Drive Criteria</div>
+              </div>
+
+              <!-- KPI 5: Target Role Match -->
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Target Role Alignment</div>
+                <div class="kpi-value" id="kpiTargetRoleDisplay" style="font-size: 1.15rem; color: #a855f7; margin-top: 0.25rem;">--</div>
+                <div class="kpi-subtext" id="kpiRoleFitScore">Role Match: --%</div>
+              </div>
+            </div>
+
+            <!-- Transparent 5-Pillar Readiness Score Breakdown Card -->
+            <div class="glass-card" style="margin-bottom: 1.75rem; padding: 1.35rem;">
+              <div class="card-title">
+                <span>📊</span> Transparent Student Readiness Rubric Breakdown (0 - 100 Scale)
+              </div>
+              <div class="card-subtitle">
+                Calculated using transparent university weights: Technical (30%), Aptitude (25%), Communication (20%), Projects (15%), Internships (10%).
+              </div>
+
+              <div class="readiness-bars" id="readinessBarsContainer">
+                <!-- Populated dynamically by JS -->
+              </div>
+              <div id="readinessMissingNotice" style="margin-top: 0.85rem; font-size: 0.82rem; color: #f59e0b; display: none;"></div>
+            </div>
+
+            <!-- Plain Language Explanation Callout -->
+            <div class="glass-card" style="margin-bottom: 1.75rem; padding: 1.25rem;">
+              <div style="font-weight: 700; font-size: 1rem; color: var(--text-primary); margin-bottom: 0.35rem;">
+                💡 Readiness Category &amp; Model Estimate Summary:
+              </div>
+              <div id="tierDescriptionText" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;">
+                <!-- Populated by JS -->
+              </div>
+              <div id="eligibilityWarningBox" style="margin-top: 0.75rem; font-size: 0.85rem; color: #f59e0b; display: none;"></div>
+            </div>
+
+            <!-- Faculty Mentor Feedback Box (If available) -->
+            <div class="glass-card" id="mentorFeedbackSection" style="margin-bottom: 1.75rem; padding: 1.25rem; display: none; border-left: 4px solid #6366f1;">
+              <div style="font-weight: 700; font-size: 1rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+                👨‍🏫 Faculty Mentor Feedback &amp; Counseling Notes:
+              </div>
+              <div id="mentorFeedbackListContainer" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <!-- Populated dynamically by JS -->
+              </div>
+            </div>
+
+            <!-- Middle Section: Tree Path Attribution & 7-Pillar Competency Radar -->
+            <div class="analysis-layout">
+              <!-- Decision Tree Ensemble Path Attribution -->
+              <div class="glass-card">
+                <div class="card-title">
+                  <span>🔍</span> Decision Tree Path Feature Attribution
+                </div>
+                <div class="card-subtitle">
+                  Mathematical Saabas tree decomposition quantifying the net probability shifts along the decision path for the student's predicted category.
+                </div>
+
+                <div id="attributionDriversHeader" style="font-size: 0.85rem; font-weight: 700; color: #10b981; margin-top: 0.75rem;">
+                  ▲ Primary Factors Driving Predicted Category:
+                </div>
+                <div class="attribution-list" id="shapPositiveDrivers">
+                  <!-- Populated by JS -->
+                </div>
+
+                <div id="attributionMitigatorsHeader" style="font-size: 0.85rem; font-weight: 700; color: #ef4444; margin-top: 1.25rem;">
+                  ▼ Restricting Constraints &amp; Counter-Factors:
+                </div>
+                <div class="attribution-list" id="shapNegativeBottlenecks">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <!-- 7-Pillar Competency Radar vs Illustrative Role Targets -->
+              <div class="glass-card">
+                <div class="card-title">
+                  <span>🎯</span> Competency Radar vs Role Benchmark
+                </div>
+                <div class="card-subtitle" id="radarTargetSubtitle">
+                  Benchmarked against recommended targets for your target role.
+                </div>
+                <div style="height: 340px; position: relative;">
+                  <canvas id="skillRadarCanvas"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Middle Section 2: Detailed Skill Gap Diagnosis Table -->
+            <div class="glass-card" style="margin-bottom: 1.75rem;">
+              <div class="card-title">
+                <span>📐</span> 7-Pillar Competency Gap Analysis
+              </div>
+              <div class="card-subtitle" id="targetTierBenchmarkBadge">
+                Target Role: Software Development Engineer (SDE)
+              </div>
+              <table class="gap-table">
+                <thead>
+                  <tr>
+                    <th>Competency</th>
+                    <th>Your score</th>
+                    <th>Role benchmark</th>
+                    <th>Gap</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="gapTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Bottom Section: Personalized 30-, 60-, 90-Day Action Roadmap -->
+            <div class="glass-card" style="margin-bottom: 1.75rem;">
+              <div class="card-title">
+                <span>🚀</span> Personalized 30-, 60-, 90-Day Actionable Preparation Sprint
+              </div>
+              <div class="card-subtitle">
+                Structured week-by-week milestones tailored to your target role, priority skill gaps, and weekly hours.
+              </div>
+              <div class="roadmap-timeline" id="roadmapTimelineContainer">
+                <!-- Populated by JS -->
+              </div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 1rem; text-align: center;">
+                * Note: Guidance based on assessment gaps, not guaranteed ways to obtain placement.
+              </div>
+            </div>
+
+            <!-- Secondary / Optional: Experimental Simulation Research Projections -->
+            <div class="experimental-box">
+              <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" id="toggleExperimentalBtn">
+                <div>
+                  <span style="font-weight: 700; color: #a5b4fc; font-size: 0.95rem;">🔬 Optional: Experimental Research Projections (Synthetic Simulation)</span>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                    Continuous simulated clearance estimate and experimental CTC regression trained on synthetic formulas.
+                  </div>
+                </div>
+                <button type="button" class="btn-secondary" style="font-size: 0.75rem; padding: 0.3rem 0.6rem;">Toggle Display</button>
+              </div>
+
+              <div id="experimentalContent" style="display: none; margin-top: 1.25rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                  <div style="background: var(--bg-glass); padding: 1rem; border-radius: var(--radius-sm);">
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">Simulated Clearance Likelihood</div>
+                    <div id="kpiPlacementProb" style="font-size: 1.5rem; font-weight: 800; color: #10b981;">--%</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Continuous probability output on synthetic labels.</div>
+                  </div>
+                  <div style="background: var(--bg-glass); padding: 1rem; border-radius: var(--radius-sm);">
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase;">Simulated Expected CTC Bracket</div>
+                    <div id="kpiExpectedCTC" style="font-size: 1.5rem; font-weight: 800; color: var(--lpu-orange);">-- LPA</div>
+                    <div id="kpiCTCRange" style="font-size: 0.75rem; color: var(--text-muted);">Bracket: -- LPA</div>
+                  </div>
+                </div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.4;">
+                  ⚠️ <strong>Methodological Limitation:</strong> A real placement probability feature must be calibrated against verified campus placement records (e.g., Platt scaling on historical drive outcomes). The CTC brackets are simulated regressions and do not constitute statistically validated confidence intervals.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 4: ASSESSMENT HISTORY & LONGITUDINAL PROGRESS
+             ==================================================================== -->
+        <section class="view-section" id="view-history">
+          <div class="glass-card" style="margin-top: 0.5rem; margin-bottom: 2rem;">
+            <div class="card-title"><span>📈</span> Student Assessment History &amp; Progress Tracking</div>
+            <div class="card-subtitle">
+              Persisted SQLite assessment store tracking student evaluations over time. Enter a Student Reference ID to view their preparation progression across repeated assessments.
+            </div>
+
+            <!-- Search and Filter Controls -->
+            <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem; flex-wrap: wrap;">
+              <input type="text" id="historySearchInput" placeholder="Enter Student ID (e.g. LPU_DEMO_ADV01)" style="flex: 1; min-width: 260px; max-width: 380px; padding: 0.65rem; border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass);">
+              
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Category:</span>
+                <select id="historyCategoryFilter" style="padding: 0.6rem 0.85rem; border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass);">
+                  <option value="ALL">All Categories</option>
+                  <option value="Strong preparation">Strong preparation</option>
+                  <option value="Developing">Developing</option>
+                  <option value="Needs attention">Needs attention</option>
+                </select>
+              </div>
+
+              <button type="button" class="btn-primary" id="btnSearchHistory">
+                <span>🔍 Query History</span>
+              </button>
+            </div>
+
+            <!-- Guest Session Notice -->
+            <div style="margin-top: 1rem; padding: 0.65rem 1rem; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: var(--radius-sm); font-size: 0.82rem; color: #93c5fd;">
+              ℹ️ <strong>Guest Browsing Session:</strong> Displaying demo student assessment history. Authenticate with a student or mentor account to record and inspect private longitudinal progress.
+            </div>
+
+            <div id="studentHistoryContainer" style="margin-top: 1.25rem;">
+              <div class="data-table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Assessment #</th>
+                      <th>Date &amp; Timestamp</th>
+                      <th>Student ID</th>
+                      <th>Department</th>
+                      <th>Target Role</th>
+                      <th>CGPA</th>
+                      <th>Readiness Category</th>
+                      <th>Input Completeness</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="historyTableBody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 5: MENTOR HUB & STUDENT ROSTER
+             ==================================================================== -->
+        <section class="view-section" id="view-mentor">
+          <div class="glass-card" style="margin-top: 0.5rem; margin-bottom: 2rem;">
+            <div class="card-title"><span>👨‍🏫</span> Faculty Mentor Student Roster &amp; Advisory Hub</div>
+            <div class="card-subtitle">
+              Authorized faculty view for monitoring assigned engineering students, tracking readiness band progressions, and providing personalized guidance notes.
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);">Filter by Category:</span>
+                <select id="mentorBandFilter" style="padding: 0.4rem 0.75rem; border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass);">
+                  <option value="ALL">All Readiness Categories</option>
+                  <option value="Strong preparation">Strong preparation (70-100)</option>
+                  <option value="Developing">Developing (40-69)</option>
+                  <option value="Needs attention">Needs attention (&lt;40)</option>
+                </select>
+              </div>
+              <button type="button" class="btn-secondary" id="btnRefreshMentorRoster">
+                <span>🔄</span> Refresh Roster
+              </button>
+            </div>
+
+            <!-- Assigned Students Table -->
+            <div class="data-table-container" style="margin-top: 1.25rem;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Department</th>
+                    <th>Target Role</th>
+                    <th>CGPA</th>
+                    <th>Readiness Category</th>
+                    <th>Readiness Score</th>
+                    <th>Demo Model Estimate*</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="mentorStudentsTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.65rem;">
+              * Demo model estimate is generated by a model trained on synthetic profiles. Not validated for real student placement outcomes.
+            </div>
+          </div>
+
+          <!-- Mentor Feedback Submission Card -->
+          <div class="glass-card" style="margin-bottom: 3rem;">
+            <div class="card-title"><span>✍️</span> Submit Mentor Guidance &amp; Action Feedback</div>
+            <div class="card-subtitle">Log official counseling feedback notes for an assigned student.</div>
+
+            <form id="mentorFeedbackForm" style="margin-top: 1rem;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div class="form-field">
+                  <label class="field-label" for="feedbackStudentId">Select Student Reference ID</label>
+                  <select id="feedbackStudentId" style="padding: 0.6rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-primary);">
+                    <!-- Populated by JS -->
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label class="field-label" for="feedbackRecommendedFocus">Recommended Priority Focus Pillar</label>
+                  <select id="feedbackRecommendedFocus" style="padding: 0.6rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-primary);">
+                    <option value="Coding &amp; Data Structures">Coding &amp; Data Structures</option>
+                    <option value="Aptitude &amp; Problem Solving">Aptitude &amp; Problem Solving</option>
+                    <option value="Communication &amp; Interviewing">Communication &amp; Interviewing</option>
+                    <option value="Software &amp; System Design">Software &amp; System Design</option>
+                    <option value="Projects &amp; Quality">Projects &amp; Quality</option>
+                    <option value="Academics &amp; Consistency">Academics &amp; Consistency</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-field" style="margin-bottom: 1rem;">
+                <label class="field-label" for="feedbackNotesText">Detailed Counseling Notes &amp; Suggested Milestones</label>
+                <textarea id="feedbackNotesText" rows="3" placeholder="e.g. Advised student to focus on LeetCode Medium dynamic programming and schedule 2 mock technical interviews with mentor." style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); background: var(--bg-glass); border: 1px solid var(--border-glass); color: var(--text-primary);"></textarea>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn-primary" id="btnSubmitFeedback">
+                  <span>💾 Save Mentor Feedback</span>
+                </button>
+              </div>
+            </form>
+            <div id="feedbackStatusAlert" style="margin-top: 0.75rem; font-size: 0.85rem; font-weight: 600;"></div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 6: COHORTS ANALYTICS (BATCH PROCESSOR)
+             ==================================================================== -->
+        <section class="view-section" id="view-cohorts">
+          <div class="glass-card" style="margin-top: 0.5rem; margin-bottom: 2rem;">
+            <div class="card-title">
+              <span>👥</span> Training &amp; Placement Officer (TPO) Batch Processor
+            </div>
+            <div class="card-subtitle">
+              Upload student batch records via CSV to evaluate cohort readiness distributions, detect common skill deficits, verify completeness, and flag students requiring intervention.
+            </div>
+
+            <div class="upload-dropzone" id="batchCsvDropzone">
+              <div class="dropzone-icon">📁</div>
+              <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem;">
+                Drag &amp; Drop Student Batch CSV File Here
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                or click to browse your computer
+              </div>
+              <input type="file" id="batchCsvFileInput" accept=".csv" style="display: none;">
+              
+              <a href="/api/sample-csv" class="btn-secondary" style="display: inline-flex; text-decoration: none;" download>
+                <span>📥</span> Download Validated Sample Batch CSV (v2.0)
+              </a>
+            </div>
+
+            <div id="tpoUploadStatus" style="font-size: 0.9rem; font-weight: 600; text-align: center;"></div>
+          </div>
+
+          <!-- TPO Batch Error Reporting Alert -->
+          <div class="validation-alert" id="tpoBatchErrorAlert" style="display: none;"></div>
+
+          <!-- TPO Batch Analytics Dashboard -->
+          <div id="tpoAnalyticsDashboard" style="display: none;">
+            <!-- TPO KPI Grid -->
+            <div class="tpo-kpi-grid">
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Valid Records Processed</div>
+                <div class="kpi-value" id="tpoTotalStudents">0</div>
+                <div class="kpi-subtext" id="tpoInvalidRowCount">0 invalid rows flagged</div>
+              </div>
+
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Cohort Completeness Rate</div>
+                <div class="kpi-value" id="tpoAvgCompleteness" style="color: #3b82f6;">0%</div>
+                <div class="kpi-subtext">Average input evidence</div>
+              </div>
+
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Cohort Package Metrics</div>
+                <div class="kpi-value" id="tpoAvgCTC" style="color: var(--lpu-orange);">₹0 LPA</div>
+                <div class="kpi-subtext" id="tpoMedianCTC">Median CTC: ₹0 LPA</div>
+              </div>
+
+              <div class="glass-card kpi-card">
+                <div class="kpi-label">Top Cohort Deficit Pillar</div>
+                <div class="kpi-value" id="tpoTopBottleneck" style="font-size: 1.15rem; color: #ef4444;">--</div>
+                <div class="kpi-subtext">Highest intervention priority</div>
+              </div>
+            </div>
+
+            <!-- TPO Cohort Charts Grid -->
+            <div class="tpo-charts-grid">
+              <div class="glass-card">
+                <div class="card-title"><span>🍩</span> Supervised Category Distribution</div>
+                <div style="height: 260px; position: relative;">
+                  <canvas id="tpoTierChartCanvas"></canvas>
+                </div>
+              </div>
+
+              <div class="glass-card">
+                <div class="card-title"><span>🏫</span> Departmental Enrollment &amp; Readiness</div>
+                <div style="height: 260px; position: relative;">
+                  <canvas id="tpoBranchChartCanvas"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Priority Intervention Roster (Foundation / Active Backlogs) -->
+            <div class="glass-card" style="margin-bottom: 2rem;">
+              <div class="card-title"><span>⚠️</span> High-Priority Intervention Roster (Needs Attention / Backlogs)</div>
+              <div class="card-subtitle">Students categorized in Needs attention readiness or carrying active backlogs requiring immediate academic counseling.</div>
+              <div class="data-table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Student ID</th>
+                      <th>Department</th>
+                      <th>Readiness Category</th>
+                      <th>Active Backlogs</th>
+                      <th>CGPA</th>
+                      <th>Primary Deficit Area</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tpoPriorityTableBody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Full Student Placement Roster Table -->
+            <div class="glass-card" style="margin-bottom: 3rem;">
+              <div class="card-title"><span>📋</span> Complete Cohort Assessment Roster</div>
+              <div class="data-table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Student ID</th>
+                      <th>Department</th>
+                      <th>Target Role</th>
+                      <th>CGPA</th>
+                      <th>DSA Solved</th>
+                      <th>Readiness Category</th>
+                      <th>Input Completeness</th>
+                      <th>Eligibility</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tpoStudentTableBody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 7: METHODOLOGY & MODEL BENCHMARK GOVERNANCE
+             ==================================================================== -->
+        <section class="view-section" id="view-methodology">
+          <div class="glass-card" style="margin-top: 0.5rem; margin-bottom: 2rem;">
+            <div class="card-title"><span>🔬</span> Supervised Machine Learning Benchmark &amp; Governance</div>
+            <div class="card-subtitle">
+              Comparative empirical performance of supervised classification algorithms evaluated using data-leakage free 3-Fold Cross-Validation and held-out test evaluation.
+            </div>
+
+            <!-- Canonical 3-Tier Rubric Explainer -->
+            <div style="margin-top: 1.5rem; margin-bottom: 1.5rem; background: var(--bg-glass); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+              <div style="font-weight: 700; margin-bottom: 0.75rem; color: #a5b4fc;">
+                📖 Canonical Student Readiness Scoring Rubric (3-Tier Definition):
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; font-size: 0.88rem;">
+                <div style="border-left: 3px solid #10b981; padding-left: 0.75rem;">
+                  <strong style="color: #34d399;">🌟 Strong preparation (Score ≥ 70):</strong> Consistent academic standing, solid algorithmic problem solving (120+ DSA solved), zero/one backlog, and confident communication. Ready for campus placement drives.
+                </div>
+                <div style="border-left: 3px solid #60a5fa; padding-left: 0.75rem;">
+                  <strong style="color: #60a5fa;">📈 Developing (40 ≤ Score &lt; 70):</strong> Demonstrates foundational syntax, core CS concepts, and basic aptitude, but requires focused milestone preparation in system design and mock interviews.
+                </div>
+                <div style="border-left: 3px solid #f87171; padding-left: 0.75rem;">
+                  <strong style="color: #f87171;">⚠️ Needs attention (Score &lt; 40):</strong> Identified gaps in core technical courses, aptitude thresholds, or multiple active backlogs (≥2). Primary focus is academic recovery and structured coding fundamentals.
+                </div>
+              </div>
+              <div style="margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-muted);">
+                * Backward Compatibility: Legacy 4-tier outputs map cleanly into these canonical tiers: Foundation ➔ Needs attention; Developing ➔ Developing; Placement Ready &amp; Advanced ➔ Strong preparation.
+              </div>
+            </div>
+
+            <!-- Classification Benchmark Table -->
+            <div style="font-size: 1.05rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              1. Supervised Placement Readiness Multi-Class Classifiers Benchmark
+            </div>
+            <div class="data-table-container">
+              <table class="benchmark-table">
+                <thead>
+                  <tr>
+                    <th>Supervised Classifier</th>
+                    <th>Test Accuracy</th>
+                    <th>Macro F1-Score</th>
+                    <th>Weighted F1</th>
+                    <th>3-Fold CV Accuracy (Mean ± Std)</th>
+                    <th>3-Fold CV Macro F1</th>
+                  </tr>
+                </thead>
+                <tbody id="clfBenchmarkTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Experimental Regressors Table -->
+            <div style="font-size: 1.05rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.5rem;">
+              2. Experimental CTC Salary Regressors (Simulated Research Baselines)
+            </div>
+            <div class="data-table-container">
+              <table class="benchmark-table">
+                <thead>
+                  <tr>
+                    <th>Supervised Regressor</th>
+                    <th>Test R² Score</th>
+                    <th>RMSE (LPA)</th>
+                    <th>MAE (LPA)</th>
+                  </tr>
+                </thead>
+                <tbody id="regBenchmarkTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Feature Importances Ranking -->
+          <div class="glass-card" style="margin-bottom: 3rem;">
+            <div class="card-title"><span>🏆</span> Global Feature Importance Ranking (Strictly Descending)</div>
+            <div class="card-subtitle">
+              Quantifies which student attributes have the highest overall influence on supervised readiness predictions (Gini Impurity Metric; Gender excluded).
+            </div>
+            <div style="height: 340px; position: relative; margin-top: 1rem;">
+              <canvas id="featureImportanceCanvas"></canvas>
+            </div>
+
+            <!-- Accessible Table & Audit Note -->
+            <div class="feat-imp-meta">
+              <div style="font-weight: 700; color: #a5b4fc; margin-bottom: 0.5rem;">
+                📌 Model Audit Investigation: Why Active Backlogs Ranks Prominently (~12.2% Relative Importance)
+              </div>
+              <p style="margin-bottom: 0.75rem; color: var(--text-secondary);">
+                In both the synthetic student data generator and binary classification training labels, students carrying <strong>2 or more active backlogs</strong> are subject to a strict clearance cap (maximum 45% placement probability) and excluded from the placed binary label. Because backlogs act as an uncompromisable recruitment gatekeeper across IT recruiters, tree-based models split on this feature near their root nodes to achieve high initial information gain.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">
+                Note: Features are plotted in strictly descending order of relative importance percentage. Gini impurity measures the total reduction in node impurity brought by each feature over all decision trees.
+              </div>
+
+              <div style="margin-top: 1.25rem;">
+                <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem;">Accessible Feature Importance Table:</div>
+                <div class="data-table-container">
+                  <table class="data-table" id="accessibleFeatTable">
+                    <thead>
+                      <tr>
+                        <th>Rank</th>
+                        <th>Feature Name</th>
+                        <th>Relative Importance (%)</th>
+                        <th>Assessment Domain</th>
+                      </tr>
+                    </thead>
+                    <tbody id="accessibleFeatTableBody">
+                      <!-- Populated by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       AUTHENTICATION & ROLE SELECTION MODAL
+       ==================================================================== -->
+  <div class="modal-overlay" id="authModal" style="display: none;">
+    <div class="auth-card">
+      <button type="button" class="auth-close-btn" id="btnCloseAuthModal">✕</button>
+      
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="authTabSignIn">Sign In</button>
+        <button type="button" class="auth-tab-btn" id="authTabRegister">Register Account</button>
+      </div>
+
+      <!-- Quick 1-Click Demo Accounts -->
+      <div class="quick-demo-accounts">
+        <div style="font-size: 0.78rem; font-weight: 700; color: #a5b4fc; margin-bottom: 0.25rem;">
+          ⚡ Quick 1-Click Demo Login:
+        </div>
+        <button type="button" class="quick-demo-btn" id="quickLoginStudent">
+          🎓 Demo Student (Aarav)
+        </button>
+        <button type="button" class="quick-demo-btn" id="quickLoginMentor">
+          👨‍🏫 Demo Mentor (Dr. Rajesh)
+        </button>
+      </div>
+
+      <!-- Auth Form -->
+      <form id="authForm">
+        <div id="authRegisterFields" style="display: none;">
+          <div class="form-field" style="margin-bottom: 0.75rem;">
+            <label class="field-label" for="authFullName">Full Name</label>
+            <input type="text" id="authFullName" placeholder="e.g. Aarav Sharma" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-primary);">
+          </div>
+          <div class="form-field" style="margin-bottom: 0.75rem;">
+            <label class="field-label" for="authRole">Account Role</label>
+            <select id="authRole" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-primary);">
+              <option value="student">Student (Candidate)</option>
+              <option value="mentor">Faculty Mentor / Counselor</option>
+            </select>
+          </div>
+          <div class="form-field" style="margin-bottom: 0.75rem;">
+            <label class="field-label" for="authEmail">Email Address</label>
+            <input type="email" id="authEmail" placeholder="e.g. student@lpu.in" style="width: 100%; padding: 0.55rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-primary);">
+          </div>
+        </div>
+
+        <div class="form-field" style="margin-bottom: 0.75rem;">
+          <label class="field-label" for="authUsername">Username</label>
+          <input type="text" id="authUsername" placeholder="e.g. student1" required style="width: 100%; padding: 0.55rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-primary);">
+        </div>
+
+        <div class="form-field" style="margin-bottom: 1.25rem;">
+          <label class="field-label" for="authPassword">Password</label>
+          <input type="password" id="authPassword" placeholder="••••••••" required style="width: 100%; padding: 0.55rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-primary);">
+        </div>
+
+        <div id="authErrorAlert" style="color: #ef4444; font-size: 0.8rem; margin-bottom: 0.75rem; display: none;"></div>
+
+        <button type="submit" class="btn-primary" id="btnSubmitAuth" style="width: 100%; justify-content: center;">
+          <span id="btnSubmitAuthText">Sign In to Platform</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>

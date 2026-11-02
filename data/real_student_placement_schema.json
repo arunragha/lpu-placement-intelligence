@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LPU Real Student Placement Season Observation Schema",
+  "description": "Standardized schema for ingesting real longitudinal student records within a defined campus recruitment cycle. Separates pre-placement predictors from recruitment outcomes and accounts for non-participation.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "student_id",
+    "academic_session",
+    "program",
+    "branch",
+    "current_semester",
+    "cgpa",
+    "active_backlogs",
+    "recruitment_participation_status"
+  ],
+  "properties": {
+    "student_id": {
+      "type": "string",
+      "description": "Unique pseudonymized student registration identifier (e.g., LPU_REG_2026_9410)."
+    },
+    "academic_session": {
+      "type": "string",
+      "description": "Placement season cycle (e.g., '2025-2026')."
+    },
+    "program": {
+      "type": "string",
+      "enum": ["B.Tech", "M.Tech", "MCA"],
+      "description": "Degree program."
+    },
+    "branch": {
+      "type": "string",
+      "enum": [
+        "Computer Science & Engineering",
+        "Information Technology",
+        "AI & Data Engineering",
+        "Electronics & Communication",
+        "Mechanical & Mechatronics"
+      ],
+      "description": "Engineering discipline or department."
+    },
+    "current_semester": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 8,
+      "description": "Semester at the time of placement assessment."
+    },
+    "graduation_year": {
+      "type": "integer",
+      "minimum": 2024,
+      "maximum": 2030
+    },
+    "pre_placement_academic_features": {
+      "type": "object",
+      "required": ["cgpa", "active_backlogs"],
+      "properties": {
+        "cgpa": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 10.0,
+          "description": "Cumulative Grade Point Average on scale 10.0."
+        },
+        "active_backlogs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of currently active, uncleared backlogs."
+        },
+        "history_backlogs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total historical backlogs previously cleared."
+        },
+        "attendance_percentage": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0,
+          "description": "Pre-placement verified academic attendance percentage."
+        },
+        "tenth_percentage": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "twelfth_percentage": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        }
+      }
+    },
+    "pre_placement_technical_features": {
+      "type": "object",
+      "properties": {
+        "primary_programming_languages": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "dsa_problems_solved": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Verified coding problems solved on platforms such as LeetCode, CodeChef, or HackerRank."
+        },
+        "dsa_proctored_assessment_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0,
+          "description": "Score from standardized proctored departmental DSA exam."
+        },
+        "competitive_contest_rating": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Peak competitive contest rating."
+        },
+        "web_cloud_assessment_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "system_design_assessment_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        }
+      }
+    },
+    "pre_placement_aptitude_communication": {
+      "type": "object",
+      "properties": {
+        "quantitative_score": { "type": "number", "minimum": 0.0, "maximum": 100.0 },
+        "logical_score": { "type": "number", "minimum": 0.0, "maximum": 100.0 },
+        "verbal_score": { "type": "number", "minimum": 0.0, "maximum": 100.0 },
+        "mock_technical_interview_score": { "type": "number", "minimum": 0.0, "maximum": 100.0 },
+        "group_discussion_score": { "type": "number", "minimum": 0.0, "maximum": 100.0 },
+        "communication_rubric_rating": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 5.0,
+          "description": "Standardized rubric rating evaluated by mentor or language laboratory."
+        }
+      }
+    },
+    "pre_placement_experiential_features": {
+      "type": "object",
+      "properties": {
+        "projects_count": { "type": "integer", "minimum": 0 },
+        "project_quality_rubric_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0,
+          "description": "Evaluated across functionality, code quality, unit testing, and documentation."
+        },
+        "internships_count": { "type": "integer", "minimum": 0 },
+        "internship_duration_months": { "type": "integer", "minimum": 0 },
+        "certifications_count": { "type": "integer", "minimum": 0 },
+        "hackathons_participated": { "type": "integer", "minimum": 0 },
+        "hackathons_won": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "recruitment_participation_status": {
+      "type": "string",
+      "enum": [
+        "active_participant",
+        "opted_out_higher_studies",
+        "opted_out_entrepreneurship",
+        "opted_out_family_business",
+        "ineligible_disciplinary",
+        "deferred_internship"
+      ],
+      "description": "CRITICAL FAIRNESS RULE: Students who opted out or did not participate must NOT be labelled as unsuccessful recruitment applicants."
+    },
+    "post_placement_observed_outcomes": {
+      "type": "object",
+      "description": "Observed outcomes at season conclusion. Strictly excluded from pre-placement feature inputs.",
+      "properties": {
+        "placement_status": {
+          "type": "string",
+          "enum": ["placed", "unplaced", "not_applicable"]
+        },
+        "offers_count": { "type": "integer", "minimum": 0 },
+        "highest_ctc_lpa": { "type": "number", "minimum": 0.0 },
+        "recruiting_company_tier": {
+          "type": "string",
+          "enum": ["Super-Dream (>15 LPA)", "Dream (10-15 LPA)", "Core/Product (6-10 LPA)", "IT Services/Mass (3.5-6 LPA)", "None"]
+        },
+        "accepted_role": { "type": "string" }
+      }
+    }
+  }
+}

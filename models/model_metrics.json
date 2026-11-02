@@ -1,0 +1,643 @@
+{
+  "version": "2.1.0",
+  "description": "LPU Placement Intelligence Supervised ML Benchmark & Artifacts",
+  "dataset_source": "data/lpu_placement_dataset.csv (Synthetic correlated institutional rubric dataset)",
+  "synthetic_notice": "Labelled dataset generated algorithmically for demonstration of supervised ML placement and readiness classification. Evaluation measures agreement with synthetic labels, not real LPU students or guaranteed recruitment outcomes.",
+  "best_classifier_name": "Random Forest Classifier",
+  "best_placement_classifier_name": "Logistic Regression",
+  "tier_classes": [
+    "Foundation",
+    "Developing",
+    "Placement Ready",
+    "Advanced"
+  ],
+  "role_classes": [
+    "AI / ML & Data Science Engineer",
+    "Associate Technology Consultant",
+    "Cloud & DevOps Engineer",
+    "Data & Business Analyst",
+    "Full Stack Developer",
+    "QA & Automation Engineer",
+    "Software Development Engineer (SDE)"
+  ],
+  "numeric_features": [
+    "cgpa",
+    "active_backlogs",
+    "dsa_problems_solved",
+    "dsa_score",
+    "coding_rating",
+    "web_cloud_score",
+    "system_design_score",
+    "quantitative_aptitude",
+    "logical_reasoning",
+    "verbal_ability",
+    "mock_interview_score",
+    "gd_score",
+    "communication_rating",
+    "projects_count",
+    "github_quality",
+    "internships_count",
+    "internship_duration_months",
+    "certifications_count",
+    "hackathons_participated",
+    "hackathons_won"
+  ],
+  "eligibility_features": [
+    "tenth_percentage",
+    "twelfth_percentage",
+    "attendance_percentage",
+    "history_backlogs"
+  ],
+  "categorical_features": [
+    "branch"
+  ],
+  "transformed_feature_names": [
+    "cgpa",
+    "active_backlogs",
+    "dsa_problems_solved",
+    "dsa_score",
+    "coding_rating",
+    "web_cloud_score",
+    "system_design_score",
+    "quantitative_aptitude",
+    "logical_reasoning",
+    "verbal_ability",
+    "mock_interview_score",
+    "gd_score",
+    "communication_rating",
+    "projects_count",
+    "github_quality",
+    "internships_count",
+    "internship_duration_months",
+    "certifications_count",
+    "hackathons_participated",
+    "hackathons_won",
+    "branch_AI & Data Engineering",
+    "branch_Computer Science & Engineering",
+    "branch_Electronics & Communication",
+    "branch_Information Technology",
+    "branch_Mechanical & Mechatronics"
+  ],
+  "feature_stats": {
+    "cgpa": {
+      "min": 5.0,
+      "max": 9.95,
+      "mean": 7.54,
+      "median": 7.51,
+      "advanced_mean": 8.56,
+      "placement_ready_mean": 8.1,
+      "developing_mean": 7.57,
+      "foundation_mean": 6.9
+    },
+    "active_backlogs": {
+      "min": 0.0,
+      "max": 3.0,
+      "mean": 0.26,
+      "median": 0.0,
+      "advanced_mean": 0.0,
+      "placement_ready_mean": 0.04,
+      "developing_mean": 0.1,
+      "foundation_mean": 0.67
+    },
+    "dsa_problems_solved": {
+      "min": 0.0,
+      "max": 750.0,
+      "mean": 149.96,
+      "median": 126.0,
+      "advanced_mean": 435.03,
+      "placement_ready_mean": 236.29,
+      "developing_mean": 114.93,
+      "foundation_mean": 84.63
+    },
+    "dsa_score": {
+      "min": 20.0,
+      "max": 100.0,
+      "mean": 60.05,
+      "median": 59.6,
+      "advanced_mean": 93.15,
+      "placement_ready_mean": 75.99,
+      "developing_mean": 56.02,
+      "foundation_mean": 47.34
+    },
+    "coding_rating": {
+      "min": 900.0,
+      "max": 2350.0,
+      "mean": 1379.59,
+      "median": 1341.0,
+      "advanced_mean": 2091.88,
+      "placement_ready_mean": 1672.08,
+      "developing_mean": 1284.99,
+      "foundation_mean": 1159.02
+    },
+    "web_cloud_score": {
+      "min": 20.0,
+      "max": 100.0,
+      "mean": 50.38,
+      "median": 49.0,
+      "advanced_mean": 87.3,
+      "placement_ready_mean": 66.73,
+      "developing_mean": 46.12,
+      "foundation_mean": 37.14
+    },
+    "system_design_score": {
+      "min": 15.0,
+      "max": 100.0,
+      "mean": 49.02,
+      "median": 48.5,
+      "advanced_mean": 81.88,
+      "placement_ready_mean": 63.45,
+      "developing_mean": 45.05,
+      "foundation_mean": 37.55
+    },
+    "quantitative_aptitude": {
+      "min": 30.0,
+      "max": 100.0,
+      "mean": 59.95,
+      "median": 60.1,
+      "advanced_mean": 81.19,
+      "placement_ready_mean": 71.66,
+      "developing_mean": 59.47,
+      "foundation_mean": 47.92
+    },
+    "logical_reasoning": {
+      "min": 32.0,
+      "max": 100.0,
+      "mean": 61.98,
+      "median": 61.8,
+      "advanced_mean": 85.48,
+      "placement_ready_mean": 73.71,
+      "developing_mean": 61.35,
+      "foundation_mean": 49.84
+    },
+    "verbal_ability": {
+      "min": 30.0,
+      "max": 100.0,
+      "mean": 59.58,
+      "median": 59.55,
+      "advanced_mean": 71.91,
+      "placement_ready_mean": 62.7,
+      "developing_mean": 60.97,
+      "foundation_mean": 53.7
+    },
+    "mock_interview_score": {
+      "min": 25.0,
+      "max": 100.0,
+      "mean": 57.64,
+      "median": 57.0,
+      "advanced_mean": 79.86,
+      "placement_ready_mean": 64.7,
+      "developing_mean": 58.27,
+      "foundation_mean": 48.12
+    },
+    "gd_score": {
+      "min": 25.0,
+      "max": 100.0,
+      "mean": 56.22,
+      "median": 55.7,
+      "advanced_mean": 71.16,
+      "placement_ready_mean": 59.88,
+      "developing_mean": 58.08,
+      "foundation_mean": 48.99
+    },
+    "communication_rating": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 2.89,
+      "median": 2.9,
+      "advanced_mean": 3.56,
+      "placement_ready_mean": 3.06,
+      "developing_mean": 2.97,
+      "foundation_mean": 2.57
+    },
+    "projects_count": {
+      "min": 0.0,
+      "max": 8.0,
+      "mean": 2.63,
+      "median": 2.0,
+      "advanced_mean": 4.18,
+      "placement_ready_mean": 3.07,
+      "developing_mean": 2.59,
+      "foundation_mean": 2.13
+    },
+    "github_quality": {
+      "min": 15.0,
+      "max": 100.0,
+      "mean": 54.53,
+      "median": 53.9,
+      "advanced_mean": 73.09,
+      "placement_ready_mean": 61.44,
+      "developing_mean": 53.48,
+      "foundation_mean": 47.66
+    },
+    "internships_count": {
+      "min": 0.0,
+      "max": 3.0,
+      "mean": 1.11,
+      "median": 1.0,
+      "advanced_mean": 2.17,
+      "placement_ready_mean": 1.65,
+      "developing_mean": 1.02,
+      "foundation_mean": 0.64
+    },
+    "internship_duration_months": {
+      "min": 0.0,
+      "max": 14.0,
+      "mean": 4.21,
+      "median": 3.0,
+      "advanced_mean": 8.12,
+      "placement_ready_mean": 5.9,
+      "developing_mean": 3.99,
+      "foundation_mean": 2.55
+    },
+    "certifications_count": {
+      "min": 0.0,
+      "max": 7.0,
+      "mean": 1.51,
+      "median": 1.0,
+      "advanced_mean": 2.32,
+      "placement_ready_mean": 1.82,
+      "developing_mean": 1.46,
+      "foundation_mean": 1.22
+    },
+    "hackathons_participated": {
+      "min": 0.0,
+      "max": 8.0,
+      "mean": 1.23,
+      "median": 1.0,
+      "advanced_mean": 2.08,
+      "placement_ready_mean": 1.57,
+      "developing_mean": 1.13,
+      "foundation_mean": 0.96
+    },
+    "hackathons_won": {
+      "min": 0.0,
+      "max": 5.0,
+      "mean": 0.31,
+      "median": 0.0,
+      "advanced_mean": 0.6,
+      "placement_ready_mean": 0.41,
+      "developing_mean": 0.29,
+      "foundation_mean": 0.21
+    }
+  },
+  "feature_importances": {
+    "active_backlogs": 0.1219,
+    "dsa_problems_solved": 0.0789,
+    "coding_rating": 0.0713,
+    "mock_interview_score": 0.0685,
+    "dsa_score": 0.0674,
+    "logical_reasoning": 0.0658,
+    "quantitative_aptitude": 0.0626,
+    "cgpa": 0.0599,
+    "system_design_score": 0.0503,
+    "web_cloud_score": 0.0501,
+    "gd_score": 0.0482,
+    "verbal_ability": 0.0453,
+    "github_quality": 0.0369,
+    "communication_rating": 0.0353,
+    "internships_count": 0.0251,
+    "hackathons_participated": 0.0235,
+    "projects_count": 0.0207,
+    "internship_duration_months": 0.0205,
+    "certifications_count": 0.0155,
+    "branch_Computer Science & Engineering": 0.0084,
+    "hackathons_won": 0.0078,
+    "branch_Electronics & Communication": 0.0071,
+    "branch_AI & Data Engineering": 0.0042,
+    "branch_Information Technology": 0.0028,
+    "branch_Mechanical & Mechatronics": 0.0019
+  },
+  "binary_placement_benchmark": {
+    "Dummy Classifier (Majority)": {
+      "accuracy": 0.5325,
+      "precision": 0.5325,
+      "recall": 1.0,
+      "f1_score": 0.6949,
+      "roc_auc": 0.5345,
+      "pr_auc": 0.7662,
+      "brier_score": 0.2493,
+      "confusion_matrix": [
+        [
+          0,
+          187
+        ],
+        [
+          0,
+          213
+        ]
+      ]
+    },
+    "Logistic Regression": {
+      "accuracy": 0.925,
+      "precision": 0.9336,
+      "recall": 0.9249,
+      "f1_score": 0.9292,
+      "roc_auc": 0.9827,
+      "pr_auc": 0.988,
+      "brier_score": 0.0516,
+      "confusion_matrix": [
+        [
+          173,
+          14
+        ],
+        [
+          16,
+          197
+        ]
+      ]
+    },
+    "Decision Tree": {
+      "accuracy": 0.8675,
+      "precision": 0.8704,
+      "recall": 0.8826,
+      "f1_score": 0.8765,
+      "roc_auc": 0.9462,
+      "pr_auc": 0.3893,
+      "brier_score": 0.0896,
+      "confusion_matrix": [
+        [
+          159,
+          28
+        ],
+        [
+          25,
+          188
+        ]
+      ]
+    },
+    "Random Forest Classifier": {
+      "accuracy": 0.9,
+      "precision": 0.8986,
+      "recall": 0.9155,
+      "f1_score": 0.907,
+      "roc_auc": 0.969,
+      "pr_auc": 0.978,
+      "brier_score": 0.0755,
+      "confusion_matrix": [
+        [
+          165,
+          22
+        ],
+        [
+          18,
+          195
+        ]
+      ]
+    }
+  },
+  "classification_models_benchmark": {
+    "Random Forest Classifier": {
+      "accuracy": 0.8475,
+      "macro_f1": 0.8423,
+      "weighted_f1": 0.8475,
+      "weighted_precision": 0.8511,
+      "weighted_recall": 0.8475,
+      "confusion_matrix": [
+        [
+          102,
+          19,
+          0,
+          0
+        ],
+        [
+          14,
+          130,
+          9,
+          0
+        ],
+        [
+          0,
+          13,
+          94,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          13
+        ]
+      ],
+      "classification_report": {
+        "Foundation": {
+          "precision": 0.8793,
+          "recall": 0.843,
+          "f1-score": 0.8608,
+          "support": 121
+        },
+        "Developing": {
+          "precision": 0.8025,
+          "recall": 0.8497,
+          "f1-score": 0.8254,
+          "support": 153
+        },
+        "Placement Ready": {
+          "precision": 0.8624,
+          "recall": 0.8785,
+          "f1-score": 0.8704,
+          "support": 107
+        },
+        "Advanced": {
+          "precision": 1.0,
+          "recall": 0.6842,
+          "f1-score": 0.8125,
+          "support": 19
+        },
+        "accuracy": 0.8475,
+        "macro avg": {
+          "precision": 0.886,
+          "recall": 0.8138,
+          "f1-score": 0.8423,
+          "support": 400
+        },
+        "weighted avg": {
+          "precision": 0.8511,
+          "recall": 0.8475,
+          "f1-score": 0.8475,
+          "support": 400
+        }
+      },
+      "cv_accuracy_mean": 0.84,
+      "cv_accuracy_std": 0.0124,
+      "cv_macro_f1_mean": 0.8079,
+      "cv_macro_f1_std": 0.0196
+    },
+    "Decision Tree Classifier": {
+      "accuracy": 0.8075,
+      "macro_f1": 0.8147,
+      "weighted_f1": 0.8075,
+      "weighted_precision": 0.809,
+      "weighted_recall": 0.8075,
+      "confusion_matrix": [
+        [
+          100,
+          20,
+          1,
+          0
+        ],
+        [
+          27,
+          117,
+          9,
+          0
+        ],
+        [
+          1,
+          13,
+          92,
+          1
+        ],
+        [
+          0,
+          0,
+          5,
+          14
+        ]
+      ],
+      "classification_report": {
+        "Foundation": {
+          "precision": 0.7812,
+          "recall": 0.8264,
+          "f1-score": 0.8032,
+          "support": 121
+        },
+        "Developing": {
+          "precision": 0.78,
+          "recall": 0.7647,
+          "f1-score": 0.7723,
+          "support": 153
+        },
+        "Placement Ready": {
+          "precision": 0.8598,
+          "recall": 0.8598,
+          "f1-score": 0.8598,
+          "support": 107
+        },
+        "Advanced": {
+          "precision": 0.9333,
+          "recall": 0.7368,
+          "f1-score": 0.8235,
+          "support": 19
+        },
+        "accuracy": 0.8075,
+        "macro avg": {
+          "precision": 0.8386,
+          "recall": 0.797,
+          "f1-score": 0.8147,
+          "support": 400
+        },
+        "weighted avg": {
+          "precision": 0.809,
+          "recall": 0.8075,
+          "f1-score": 0.8075,
+          "support": 400
+        }
+      },
+      "cv_accuracy_mean": 0.7825,
+      "cv_accuracy_std": 0.0207,
+      "cv_macro_f1_mean": 0.7651,
+      "cv_macro_f1_std": 0.0265
+    },
+    "Multi-Class Logistic Regression": {
+      "accuracy": 0.815,
+      "macro_f1": 0.6682,
+      "weighted_f1": 0.8022,
+      "weighted_precision": 0.8026,
+      "weighted_recall": 0.815,
+      "confusion_matrix": [
+        [
+          112,
+          9,
+          0,
+          0
+        ],
+        [
+          19,
+          126,
+          8,
+          0
+        ],
+        [
+          0,
+          19,
+          86,
+          2
+        ],
+        [
+          0,
+          0,
+          17,
+          2
+        ]
+      ],
+      "classification_report": {
+        "Foundation": {
+          "precision": 0.855,
+          "recall": 0.9256,
+          "f1-score": 0.8889,
+          "support": 121
+        },
+        "Developing": {
+          "precision": 0.8182,
+          "recall": 0.8235,
+          "f1-score": 0.8208,
+          "support": 153
+        },
+        "Placement Ready": {
+          "precision": 0.7748,
+          "recall": 0.8037,
+          "f1-score": 0.789,
+          "support": 107
+        },
+        "Advanced": {
+          "precision": 0.5,
+          "recall": 0.1053,
+          "f1-score": 0.1739,
+          "support": 19
+        },
+        "accuracy": 0.815,
+        "macro avg": {
+          "precision": 0.737,
+          "recall": 0.6645,
+          "f1-score": 0.6682,
+          "support": 400
+        },
+        "weighted avg": {
+          "precision": 0.8026,
+          "recall": 0.815,
+          "f1-score": 0.8022,
+          "support": 400
+        }
+      },
+      "cv_accuracy_mean": 0.8044,
+      "cv_accuracy_std": 0.0092,
+      "cv_macro_f1_mean": 0.6402,
+      "cv_macro_f1_std": 0.0237
+    }
+  },
+  "regression_models_benchmark": {
+    "Gradient Boosting Regressor": {
+      "r2_score": 0.9262,
+      "rmse": 1.6413,
+      "mae": 1.2139
+    },
+    "Random Forest Regressor": {
+      "r2_score": 0.8915,
+      "rmse": 1.9902,
+      "mae": 1.4223
+    },
+    "Ridge Regressor": {
+      "r2_score": 0.8492,
+      "rmse": 2.3459,
+      "mae": 1.5411
+    }
+  },
+  "probability_model_metrics": {
+    "r2_score": 0.9031,
+    "mae": 7.48
+  },
+  "role_model_accuracy": 0.81,
+  "total_dataset_samples": 2000,
+  "train_samples": 1600,
+  "test_samples": 400
+}
